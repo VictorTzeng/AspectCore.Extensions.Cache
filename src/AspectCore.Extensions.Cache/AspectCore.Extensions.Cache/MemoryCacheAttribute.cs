@@ -38,20 +38,24 @@ namespace AspectCore.Extensions.Cache
                     : CacheKey;
                 if (_cache.TryGetValue(key, out object value))
                 {
-                    context.ReturnValue = value;
+                    if (context.ServiceMethod.IsReturnTask())
+                    {
+                        context.ReturnValue = Task.FromResult(value);
+                    }
+                    else
+                    {
+                        context.ReturnValue = value;
+                    }
                 }
                 else
                 {
+                    await context.Invoke(next);
                     object returnValue = context.ReturnValue;
-                    var returnType = context.ServiceMethod.ReturnType;
-                    if (returnType.IsTask())
+                    if (context.ServiceMethod.IsReturnTask())
                     {
-                        returnType = returnType.GenericTypeArguments[0];
-                        returnValue = typeof(Task).GetMethod("FromResult").MakeGenericMethod(new Type[] {returnType})
-                            .Invoke(this, new[] {returnValue});
+                        returnValue = returnValue.GetType().GetField("Result").GetValue(returnValue);
                     }
 
-                    await context.Invoke(next);
                     _cache.Set(key, returnValue, new MemoryCacheEntryOptions()
                     {
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(Expiration)

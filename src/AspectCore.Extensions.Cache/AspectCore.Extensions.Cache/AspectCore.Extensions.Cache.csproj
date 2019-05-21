@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>victor.tzeng</Authors>
+    <Company>victor.tzeng</Company>
+    <Copyright>AspectCore.Extensions.Cache © victor.tzeng</Copyright>
+    <PackageProjectUrl>https://github.com/VictorTzeng/AspectCore.Extensions.Cache</PackageProjectUrl>
+    <PackageReleaseNotes>A redis &amp; memory cache middleware using AspectCore-Framework &amp; CSRedisCore.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

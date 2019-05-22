@@ -57,7 +57,6 @@ namespace AspectCore.Extensions.Cache
                         returnValue = returnValue.GetType().GetField("Result").GetValue(returnValue);
                     }
                     await DistributedCacheManager.SetAsync(key, returnValue, Expiration);
-                    await next(context);
                 }
             }
         }

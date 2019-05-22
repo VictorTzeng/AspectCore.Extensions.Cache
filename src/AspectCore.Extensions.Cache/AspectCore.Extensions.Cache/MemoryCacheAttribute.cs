@@ -60,7 +60,6 @@ namespace AspectCore.Extensions.Cache
                     {
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(Expiration)
                     });
-                    await next(context);
                 }                
             }
         }

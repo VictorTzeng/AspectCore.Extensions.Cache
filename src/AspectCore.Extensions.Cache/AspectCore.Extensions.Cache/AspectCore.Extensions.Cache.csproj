@@ -7,7 +7,11 @@
     <Company>victor.tzeng</Company>
     <Copyright>AspectCore.Extensions.Cache © victor.tzeng</Copyright>
     <PackageProjectUrl>https://github.com/VictorTzeng/AspectCore.Extensions.Cache</PackageProjectUrl>
-    <PackageReleaseNotes>A redis &amp; memory cache middleware using AspectCore-Framework &amp; CSRedisCore.</PackageReleaseNotes>
+    <PackageReleaseNotes>修复aop缓存目标方法二次执行的bug</PackageReleaseNotes>
+    <Description>A redis &amp; memory cache middleware using AspectCore-Framework &amp; CSRedisCore.</Description>
+    <AssemblyVersion>1.0.2019.52201</AssemblyVersion>
+    <FileVersion>1.0.2019.52201</FileVersion>
+    <Version>1.0.2019.52201</Version>
   </PropertyGroup>
 
   <ItemGroup>

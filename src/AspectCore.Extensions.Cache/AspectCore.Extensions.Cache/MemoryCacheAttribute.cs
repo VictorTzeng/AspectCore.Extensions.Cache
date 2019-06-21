@@ -40,7 +40,8 @@ namespace AspectCore.Extensions.Cache
                 {
                     if (context.ServiceMethod.IsReturnTask())
                     {
-                        context.ReturnValue = Task.FromResult(value);
+                        dynamic temp = value;
+                        context.ReturnValue = Task.FromResult(temp);
                     }
                     else
                     {
@@ -50,13 +51,13 @@ namespace AspectCore.Extensions.Cache
                 else
                 {
                     await context.Invoke(next);
-                    object returnValue = context.ReturnValue;
+                    dynamic returnValue = context.ReturnValue;
                     if (context.ServiceMethod.IsReturnTask())
                     {
-                        returnValue = returnValue.GetType().GetField("Result").GetValue(returnValue);
+                        returnValue = returnValue.Result;
                     }
 
-                    _cache.Set(key, returnValue, new MemoryCacheEntryOptions()
+                    _cache.Set(key, (object)returnValue, new MemoryCacheEntryOptions()
                     {
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(Expiration)
                     });

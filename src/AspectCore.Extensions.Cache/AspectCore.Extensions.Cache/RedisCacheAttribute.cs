@@ -16,9 +16,9 @@ namespace AspectCore.Extensions.Cache
     public class RedisCacheAttribute : AbstractInterceptorAttribute
     {
         /// <summary>
-        /// 缓存有限期，单位：分钟。默认值：10。
+        /// 缓存有限期，单位：秒。默认值：600。
         /// </summary>
-        public int Expiration { get; set; } = 10;
+        public int Expiration { get; set; } = 10 * 60;
 
         public string CacheKey { get; set; } = null;
 

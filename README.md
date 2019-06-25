@@ -18,7 +18,7 @@ A redis & memory cache middleware using [AspectCore-Framework](https://github.co
 
     CacheKey -> default value : {namespace}{class}{method}{params hashcode}
 
-    Expiration -> default value : 10 (minutes)
+    Expiration -> default value : memcahced -> 10 (minutes), redis -> 600 (seconds)
 
 ```
     public interface ISysMenuRepository:IRepository<SysMenu, string>

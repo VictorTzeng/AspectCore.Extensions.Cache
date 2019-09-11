@@ -35,18 +35,16 @@ namespace AspectCore.Extensions.Cache
                 var key = string.IsNullOrEmpty(CacheKey)
                     ? new CacheKey(context.ServiceMethod, parameters, context.Parameters).GetRedisCacheKey()
                     : CacheKey;
-                var value =  await DistributedCacheManager.GetAsync(key);
+                var value =  await DistributedCacheManager.GetAsync<object>(key);
                 if (value != null)
                 {
                     if (context.ServiceMethod.IsReturnTask())
                     {
-                        dynamic result = JsonConvert.DeserializeObject(value,
-                            context.ServiceMethod.ReturnType.GenericTypeArguments[0]); 
-                        context.ReturnValue = Task.FromResult(result);
+                        context.ReturnValue = Task.FromResult(value);
                     }
                     else
                     {
-                        context.ReturnValue = JsonConvert.DeserializeObject(value, context.ServiceMethod.ReturnType);
+                        context.ReturnValue = value;
                     }
                 }
                 else
@@ -58,7 +56,6 @@ namespace AspectCore.Extensions.Cache
                         returnValue = returnValue.Result;
                     }
                     await DistributedCacheManager.SetAsync(key, returnValue, Expiration);
-                    //await next(context);
                 }
             }
         }

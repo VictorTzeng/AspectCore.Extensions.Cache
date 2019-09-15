@@ -18,14 +18,12 @@ A redis & memory cache middleware using [AspectCore-Framework](https://github.co
 
     CacheKey -> default value : {namespace}{class}{method}{params hashcode}
 
-    Expiration -> default value : memcahced -> 10 (minutes), redis -> 600 (seconds)
+    Expiration -> default value : 600 (seconds)
 
 ```
     public interface ISysMenuRepository:IRepository<SysMenu, string>
     {
-        [RedisCache]
-        //[RedisCache(CacheKey = "Redis_Cache_SysMenu", Expiration = 5)]
-        //[MemoryCache]
+        [Cached(CacheKey = "Redis_Cache_SysMenu", Expiration = 5)]
         IList<SysMenu> GetMenusByCache(Expression<Func<SysMenu, bool>> where);
     }
 ```

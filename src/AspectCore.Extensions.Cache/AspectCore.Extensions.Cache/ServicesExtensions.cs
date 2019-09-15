@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AspectCore.Configuration;
-using AspectCore.Extensions.DependencyInjection;
-using AspectCore.Injector;
 using CSRedis;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +30,7 @@ namespace AspectCore.Extensions.Cache
             RedisHelper.Initialization(redisClient);
             //注册mvc分布式缓存
             services.AddSingleton<IDistributedCache>(new Microsoft.Extensions.Caching.Redis.CSRedisCache(RedisHelper.Instance));
+            services.AddSingleton<IDistributedCacheManager, DistributedCacheManager>();
             return services;
         }
 
@@ -42,7 +38,9 @@ namespace AspectCore.Extensions.Cache
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            return services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+            services.AddSingleton<IDistributedCacheManager, DistributedCacheManager>();
+            return services;
         }
     }
 }

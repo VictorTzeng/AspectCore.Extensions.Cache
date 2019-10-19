@@ -2,6 +2,32 @@
 A redis & memory cache middleware using [AspectCore-Framework](https://github.com/dotnetcore/AspectCore-Framework) & [csredis](https://github.com/2881099/csredis).
 
 # How to use
+
+* In dotnetcore 3.0, we must configure Program.cs:
+```
+using AspectCore.Extensions.DependencyInjection;// import this namespace
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            // for aspcectcore
+            .UseServiceProviderFactory(new AspectCoreServiceProviderFactory())
+        ;
+}
+```
+
 * 1. configure services in StartUp.cs:
 ```
         public IServiceProvider ConfigureServices(IServiceCollection services)

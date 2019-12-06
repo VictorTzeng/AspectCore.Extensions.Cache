@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/v-xiaze0473/v-xiaze/_apis/build/status/VictorTzeng.AspectCore.Extensions.Cache?branchName=master)](https://dev.azure.com/v-xiaze0473/v-xiaze/_build/latest?definitionId=3&branchName=master)
+
 # Introduction
 A redis & memory cache middleware using [AspectCore-Framework](https://github.com/dotnetcore/AspectCore-Framework) & [csredis](https://github.com/2881099/csredis).
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AspectCore.Configuration;
+using AspectCore.DependencyInjection;
 using AspectCore.Extensions.DependencyInjection;
-using AspectCore.Injector;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AspectCore.Extensions.Cache
@@ -15,8 +15,8 @@ namespace AspectCore.Extensions.Cache
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             services.ConfigureDynamicProxy(configure);
-            services.AddAspectCoreContainer();
-            return Resolver = services.ToServiceContainer().Build();
+            services.AddAspectServiceContext();
+            return Resolver = services.ToServiceContext().Build();
         }
 
         public static T Resolve<T>()

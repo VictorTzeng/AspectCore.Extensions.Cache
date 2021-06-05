@@ -17,7 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1.8.0
       with:
         dotnet-version: 5.0.100
+    - name: Build
+      run: dotnet build "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache.csproj" --configuration Release
     - name: Pack
-      run: dotnet pack "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache.csproj" --configuration Release -p:PackageVersion=1.2.4
+      run: dotnet pack "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache.csproj" --configuration Release -p:PackageVersion=1.2.4 --output nupkgs
     - name: Publish
-      run: dotnet nuget push "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/bin/Release/AspectCore.Extensions.Cache.1.2.4.nupkg" --skip-duplicate --api-key oy2irsgtchjxgn24iz2aotr6su7hjgse3b6w6zqn5re6qi --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push "nupkgs/AspectCore.Extensions.Cache.1.2.4.nupkg" --skip-duplicate --api-key oy2irsgtchjxgn24iz2aotr6su7hjgse3b6w6zqn5re6qi --source "https://api.nuget.org/v3/index.json"

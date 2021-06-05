@@ -20,6 +20,6 @@ jobs:
     - name: Build
       run: dotnet build "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache.csproj" -c Release
     - name: Pack
-      run: dotnet pack --configuration Release
+      run: dotnet pack "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache.csproj" --configuration Release
     - name: Publish
-      run: dotnet nuget push "bin/Release/AspectCore.Extensions.Cache.1.2.4.nupkg"  --api-key oy2irsgtchjxgn24iz2aotr6su7hjgse3b6w6zqn5re6qi --source "github"
+      run: dotnet nuget push "src/AspectCore.Extensions.Cache/AspectCore.Extensions.Cache/bin/Release/AspectCore.Extensions.Cache.1.2.4.nupkg"  --api-key oy2irsgtchjxgn24iz2aotr6su7hjgse3b6w6zqn5re6qi --source "github"

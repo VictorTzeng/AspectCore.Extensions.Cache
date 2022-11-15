@@ -6,11 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 #if NETSTANDARD2_0_OR_GREATER
 using System.Runtime.Serialization.Formatters.Binary;
 #endif
 #if NET5_0_OR_GREATER
-using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 #endif
